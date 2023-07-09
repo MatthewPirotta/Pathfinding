@@ -6,11 +6,9 @@ import java.util.Collections;
 
 public class Grid {
     HashMap<Coordinate, Node> allNodes = new HashMap<Coordinate, Node>();
-    Node startNode;
-    Node endNode;
 
     public void initiliseGrid() {
-        for (int x = 0; x < 20; x++) {
+        for (int x = 0; x < 10; x++) {
             for (int y = 0; y < 10; y++) {
                 Coordinate coord = new Coordinate(x, y);
                 allNodes.put(coord, new Node(coord));
@@ -18,28 +16,21 @@ public class Grid {
         }
     }
 
-    public void displayGrid() {
-        /*
-         * int prevX =0;
-         * for (Node node : allNodes.values()) {
-         * 
-         * if(prevX != node.getCoordinate().getX()){
-         * System.out.println("");
-         * prevX = node.getCoordinate().getX();
-         * }
-         * 
-         * System.out.print(node.getCoordinate().getX() + "," +
-         * node.getCoordinate().getY());
-         * System.out.print("");
-         * }
-         */
+    public void displayGrid(HashMap<Coordinate, Node> allNodes, HashMap<Node, Node> cameFrom, ArrayList<Node> path,
+            Node startNode,
+            Node targetNode) {
 
         Coordinate coord = new Coordinate();
-        for (int x = 0; x < 30; x++) {
-            for (int y = 0; y < 30; y++) {
+        Node node = new Node();
+
+        String colour;
+
+        for (int y = 0; y < 20; y++) {
+            for (int x = 0; x < 20; x++) {
                 coord.set(x, y);
                 if (allNodes.containsKey(coord)) {
-                    System.out.print(coord);
+                    colour = selectColour(cameFrom, path, allNodes.get(coord), startNode, targetNode);
+                    System.out.print(colour + coord + "\u001B[37m");
                     System.out.print("  ");
                 }
             }
@@ -47,7 +38,21 @@ public class Grid {
         }
     }
 
-    public ArrayList<Node> findNeighbours(HashMap<Coordinate, Node> allNodes, Node searchNode,
+    private String selectColour(HashMap<Node, Node> cameFrom, ArrayList<Node> path, Node node, Node startNode,
+            Node targetNode) {
+        if (node.equals(startNode)) {
+            return "\u001B[32m"; // green
+        } else if (node.equals(targetNode)) {
+            return "\u001B[31m"; // red
+        } else if (path.contains(node)) {
+            return "\u001B[34m"; // blue
+        } else if (cameFrom.containsValue(node)) {
+            return "\u001B[30m"; // blue
+        } else
+            return "\u001B[37m"; // white
+    }
+
+    private ArrayList<Node> findNeighbours(HashMap<Coordinate, Node> allNodes, Node searchNode,
             HashMap<Node, Node> cameFrom) {
         Coordinate searchCoordinate = searchNode.getCoordinate();
         ArrayList<Node> foundNeighbours = new ArrayList<>();
@@ -57,7 +62,7 @@ public class Grid {
             {
                 add(new Coordinate(searchCoordinate.getX(), searchCoordinate.getY() + 1));
                 add(new Coordinate(searchCoordinate.getX() + 1, searchCoordinate.getY()));
-                add(new Coordinate(-searchCoordinate.getX(), searchCoordinate.getY() - 1));
+                add(new Coordinate(searchCoordinate.getX(), searchCoordinate.getY() - 1));
                 add(new Coordinate(searchCoordinate.getX() - 1, searchCoordinate.getY()));
             }
         };
@@ -95,14 +100,15 @@ public class Grid {
             searchQueue.addAll(findNeighbours(allNodes, searchNode, cameFrom));
         }
 
-        System.out.println(generatePath(targetNode, startNode, cameFrom));
+        ArrayList<Node> path = generatePath(targetNode, startNode, cameFrom);
+        displayGrid(allNodes, cameFrom, path, startNode, targetNode);
     }
 
-    public ArrayList<Node> generatePath(Node targetNode, Node startNode, HashMap<Node, Node> cameFrom){
+    private ArrayList<Node> generatePath(Node targetNode, Node startNode, HashMap<Node, Node> cameFrom) {
         Node currentNode = targetNode;
         ArrayList<Node> path = new ArrayList<>();
 
-        while(!currentNode.equals(startNode)){
+        while (!currentNode.equals(startNode)) {
             path.add(currentNode);
             currentNode = cameFrom.get(currentNode);
         }
