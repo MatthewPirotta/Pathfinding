@@ -34,7 +34,7 @@ public class Grid {
             }
         }
         setupWalls();
-        setupRoads();
+       // setupRoads();
     }
 
     private void setupWalls() {

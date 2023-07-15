@@ -33,7 +33,8 @@ public class PathFinding {
                 if (!grid.getCostSoFar().containsKey(neighbourCoordinate)
                         || newCost < grid.getCostSoFar().get(neighbourCoordinate)) {
 
-                    priority = newCost + heuristic(endNode.getCoordinate(), neighbourCoordinate);
+                    priority = adjustedWeights(grid, searchCoordinate, neighbourCoordinate, newCost, heuristic(endNode.getCoordinate(), neighbourCoordinate));
+                            
                     grid.getCostSoFar().put(neighbourCoordinate, priority);
                     grid.getSearchQueue().add(new AbstractMap.SimpleEntry<>(foundNeighbour, newCost));
                     grid.getCameFrom().put(foundNeighbour, searchNode);
@@ -41,6 +42,18 @@ public class PathFinding {
 
             }
         }
+    }
+
+    private int calculateNodePrioity(int newCost, int heuristicValue){
+        return newCost + heuristicValue;
+    }
+
+    private int adjustedWeights(Grid grid, Coordinate searhCoordinate, Coordinate neighbouCoordinate, int newCost, int heuristicValue){
+        int priority = calculateNodePrioity(newCost, heuristicValue);
+        int nudge = 0;
+        if(((searhCoordinate.getX() + searhCoordinate.getY())%2 == 0) && neighbouCoordinate.getX() != searhCoordinate.getX()) nudge =1;
+        if(((searhCoordinate.getX() + searhCoordinate.getY())%2 == 1) && neighbouCoordinate.getX() != searhCoordinate.getY()) nudge =1;
+        return priority + 1*nudge; //TODO instead of *1 *.001 
     }
 
     public void breathFirstSearch(Grid grid, Node startNode, Node targetNode) {
