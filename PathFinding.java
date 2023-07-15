@@ -12,10 +12,10 @@ public class PathFinding {
 
         ArrayList<Coordinate> directions = new ArrayList<Coordinate>() {
             {
-                add(new Coordinate(searchCoordinate.getX(), searchCoordinate.getY() + 1));
-                add(new Coordinate(searchCoordinate.getX() + 1, searchCoordinate.getY()));
-                add(new Coordinate(searchCoordinate.getX(), searchCoordinate.getY() - 1));
-                add(new Coordinate(searchCoordinate.getX() - 1, searchCoordinate.getY()));
+                add(new Coordinate(searchCoordinate.getX(), searchCoordinate.getY()-1)); //N
+                add(new Coordinate(searchCoordinate.getX()+1, searchCoordinate.getY())); //E
+                add(new Coordinate(searchCoordinate.getX(), searchCoordinate.getY()+1)); //S
+                add(new Coordinate(searchCoordinate.getX()-1, searchCoordinate.getY())); //W
             }
         };
 

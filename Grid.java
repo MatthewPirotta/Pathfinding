@@ -30,10 +30,11 @@ public class Grid {
             for (int y = 0; y < 10; y++) {
                 Coordinate coord = new Coordinate(x, y);
                 getAllNodes().put(coord, new Node(coord));
-                getNodeWeight().put(coord, 1);
+                getNodeWeight().put(coord, 10);
             }
         }
         setupWalls();
+        setupRoads();
     }
 
     private void setupWalls() {
@@ -56,6 +57,27 @@ public class Grid {
         getAllNodes().remove(new Coordinate(3, 8));
         getAllNodes().remove(new Coordinate(2, 8));
         getAllNodes().remove(new Coordinate(1, 8));
+    }
+
+    private void setupRoads(){
+        getNodeWeight().put(new Coordinate(0, 7), 5);
+        getNodeWeight().put(new Coordinate(1, 7), 5);
+        getNodeWeight().put(new Coordinate(2, 7), 5);
+        getNodeWeight().put(new Coordinate(3, 7), 5);
+        getNodeWeight().put(new Coordinate(4, 7), 5);
+        getNodeWeight().put(new Coordinate(4, 6), 5);
+        getNodeWeight().put(new Coordinate(4, 5), 5);
+        getNodeWeight().put(new Coordinate(4, 4), 5);
+        getNodeWeight().put(new Coordinate(4, 3), 5);
+        getNodeWeight().put(new Coordinate(4, 2), 5);
+        getNodeWeight().put(new Coordinate(4, 1), 5);
+        getNodeWeight().put(new Coordinate(4, 0), 5);
+        getNodeWeight().put(new Coordinate(5, 0), 5);
+        getNodeWeight().put(new Coordinate(6, 0), 5);
+        getNodeWeight().put(new Coordinate(7, 0), 5);
+        getNodeWeight().put(new Coordinate(8, 0), 5);
+        getNodeWeight().put(new Coordinate(9, 0), 5);
+
     }
 
     // #region Getters & Setters
