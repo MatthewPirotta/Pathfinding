@@ -16,8 +16,8 @@ public class GridManager {
         Coordinate coord = new Coordinate();
         String colour;
 
-        for (int y = 0; y < 20; y++) {
-            for (int x = 0; x < 20; x++) {
+        for (int y = 0; y < 10; y++) {
+            for (int x = 0; x < 10; x++) {
                 coord.set(x, y);
                 if (grid.getAllNodes().containsKey(coord)) {
                     colour = selectColour(grid, grid.getAllNodes().get(coord), startNode, targetNode);

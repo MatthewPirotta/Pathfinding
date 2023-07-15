@@ -22,7 +22,7 @@ public class Grid {
     }
 
     public void setupSearch() {
-        pathFinder.breathFirstSearch(this, new Node(new Coordinate(0, 2)), new Node(new Coordinate(9, 2)));
+        pathFinder.breathFirstSearch(this, new Node(new Coordinate(0, 8)), new Node(new Coordinate(8, 1)));
     }
 
     public void initiliseGrid() {
@@ -36,11 +36,26 @@ public class Grid {
         setupWalls();
     }
 
-    private void setupWalls(){
-        getAllNodes().remove(new Coordinate(2,2));
-        getAllNodes().remove(new Coordinate(2,1));
-        getAllNodes().remove(new Coordinate(2,3));
-        getAllNodes().remove(new Coordinate(8,2));
+    private void setupWalls() {
+        getAllNodes().remove(new Coordinate(5, 2));
+        getAllNodes().remove(new Coordinate(6, 2));
+        getAllNodes().remove(new Coordinate(7, 2));
+        getAllNodes().remove(new Coordinate(8, 2));
+        getAllNodes().remove(new Coordinate(9, 2));
+        getAllNodes().remove(new Coordinate(9, 3));
+        getAllNodes().remove(new Coordinate(9, 4));
+        getAllNodes().remove(new Coordinate(9, 5));
+        getAllNodes().remove(new Coordinate(9, 6));
+        getAllNodes().remove(new Coordinate(9, 7));
+        getAllNodes().remove(new Coordinate(9, 8));
+        getAllNodes().remove(new Coordinate(8, 8));
+        getAllNodes().remove(new Coordinate(7, 8));
+        getAllNodes().remove(new Coordinate(6, 8));
+        getAllNodes().remove(new Coordinate(5, 8));
+        getAllNodes().remove(new Coordinate(4, 8));
+        getAllNodes().remove(new Coordinate(3, 8));
+        getAllNodes().remove(new Coordinate(2, 8));
+        getAllNodes().remove(new Coordinate(1, 8));
     }
 
     // #region Getters & Setters

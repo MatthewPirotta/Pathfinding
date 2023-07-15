@@ -33,7 +33,7 @@ public class PathFinding {
                 if (!grid.getCostSoFar().containsKey(neighbourCoordinate)
                         || newCost < grid.getCostSoFar().get(neighbourCoordinate)) {
 
-                    priority = heuristic(endNode.getCoordinate(), neighbourCoordinate);
+                    priority = newCost + heuristic(endNode.getCoordinate(), neighbourCoordinate);
                     grid.getCostSoFar().put(neighbourCoordinate, priority);
                     grid.getSearchQueue().add(new AbstractMap.SimpleEntry<>(foundNeighbour, newCost));
                     grid.getCameFrom().put(foundNeighbour, searchNode);
