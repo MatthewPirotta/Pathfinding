@@ -13,10 +13,8 @@ public class Coordinate {
         this.y = y;
     }
 
-    
-
     @Override
-    public String toString(){
+    public String toString() {
         return String.format("%2d,%2d", x, y);
     }
 
@@ -68,7 +66,7 @@ public class Coordinate {
 
     @Override
     public int hashCode() {
-      return Objects.hash(getX(), getY());
+        return Objects.hash(getX(), getY());
     }
 
 }

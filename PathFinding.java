@@ -28,7 +28,8 @@ public class PathFinding {
                     continue;
                 }
 
-                newCost = grid.getCostSoFar().get(searchNode.getCoordinate()) + grid.getNodeWeight().get(neighbourCoordinate);
+                newCost = grid.getCostSoFar().get(searchNode.getCoordinate())
+                        + grid.getNodeWeight().get(neighbourCoordinate);
                 if (!grid.getCostSoFar().containsKey(neighbourCoordinate)
                         || newCost < grid.getCostSoFar().get(neighbourCoordinate)) {
 
@@ -78,8 +79,8 @@ public class PathFinding {
         return grid.getPath();
     }
 
-    int heuristic(Coordinate a, Coordinate b){
-        //Manhattan distance on a square grid
-        return Math.abs(a.getX() - b.getX()) + Math.abs(a.getY() -b.getY());
+    int heuristic(Coordinate a, Coordinate b) {
+        // Manhattan distance on a square grid
+        return Math.abs(a.getX() - b.getX()) + Math.abs(a.getY() - b.getY());
     }
 }

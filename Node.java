@@ -1,13 +1,13 @@
 import java.util.Objects;
 
-public class Node{
+public class Node {
     private Coordinate coordinate;
 
-    public Node(){
-        
+    public Node() {
+
     }
-    
-    public Node(Coordinate coordinate){
+
+    public Node(Coordinate coordinate) {
         this.coordinate = coordinate;
     }
 
@@ -16,7 +16,7 @@ public class Node{
         return ("coordinate=" + coordinate);
     }
 
-     @Override
+    @Override
     public boolean equals(Object o) {
         // If the object is compared with itself then return true
         if (o == this) {
@@ -43,21 +43,17 @@ public class Node{
 
     @Override
     public int hashCode() {
-      return Objects.hash(getCoordinate());
+        return Objects.hash(getCoordinate());
     }
 
-
-    //#region
-    public Coordinate getCoordinate(){
+    // #region
+    public Coordinate getCoordinate() {
         return coordinate;
     }
 
     public void setCoordinate(Coordinate coordinate) {
         this.coordinate = coordinate;
     }
-    //#endregion
+    // #endregion
 
-
-    
-   
 }

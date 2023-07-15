@@ -11,8 +11,6 @@ public class GridManager {
         return instance;
     }
 
-    
-
     public void displayGrid(Grid grid, Node startNode, Node targetNode) {
 
         Coordinate coord = new Coordinate();
@@ -23,7 +21,12 @@ public class GridManager {
                 coord.set(x, y);
                 if (grid.getAllNodes().containsKey(coord)) {
                     colour = selectColour(grid, grid.getAllNodes().get(coord), startNode, targetNode);
-                    System.out.print(colour + coord + "\u001B[37m");
+                    System.out.print(colour + coord + "\u001B[37m"); //white
+                    System.out.print("  ");
+                }
+                else{
+                    colour = "\u001B[45m"; //purple
+                    System.out.print(colour + coord+ "\u001B[40m"); //black
                     System.out.print("  ");
                 }
             }
@@ -39,10 +42,9 @@ public class GridManager {
         } else if (grid.getPath().contains(node)) {
             return "\u001B[34m"; // blue
         } else if (grid.getCameFrom().containsValue(node)) {
-            return "\u001B[30m"; // blue
+            return "\u001B[33m"; // yellow
         } else
             return "\u001B[37m"; // white
     }
-    
-    
+
 }

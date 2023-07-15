@@ -10,20 +10,20 @@ public class Grid {
     private HashMap<Coordinate, Integer> costSoFar = new HashMap<>();
     private HashMap<Coordinate, Integer> nodeWeight = new HashMap<>();
 
-    private PriorityQueue<AbstractMap.SimpleEntry<Node, Integer>> searchQueue = new PriorityQueue<>(Comparator.comparing(AbstractMap.SimpleEntry:: getValue));
+    private PriorityQueue<AbstractMap.SimpleEntry<Node, Integer>> searchQueue = new PriorityQueue<>(
+            Comparator.comparing(AbstractMap.SimpleEntry::getValue));
     private ArrayList<Node> path = new ArrayList<>();
 
     private GridManager gridManager = GridManager.getInstance();
-    private PathFinding pathFinder = new PathFinding(); // TODO SINGLETON? 
+    private PathFinding pathFinder = new PathFinding(); // TODO SINGLETON?
 
-    public Grid(){
+    public Grid() {
         initiliseGrid();
     }
 
-    public void setupSearch(){
+    public void setupSearch() {
         pathFinder.breathFirstSearch(this, new Node(new Coordinate(0, 2)), new Node(new Coordinate(9, 2)));
     }
-
 
     public void initiliseGrid() {
         for (int x = 0; x < 10; x++) {
@@ -33,8 +33,16 @@ public class Grid {
                 getNodeWeight().put(coord, 1);
             }
         }
+        setupWalls();
     }
-    
+
+    private void setupWalls(){
+        getAllNodes().remove(new Coordinate(2,2));
+        getAllNodes().remove(new Coordinate(2,1));
+        getAllNodes().remove(new Coordinate(2,3));
+        getAllNodes().remove(new Coordinate(8,2));
+    }
+
     // #region Getters & Setters
 
     public HashMap<Coordinate, Node> getAllNodes() {
@@ -44,7 +52,7 @@ public class Grid {
     public HashMap<Node, Node> getCameFrom() {
         return cameFrom;
     }
-    
+
     public ArrayList<Node> getPath() {
         return path;
     }
@@ -53,22 +61,17 @@ public class Grid {
         this.path = path;
     }
 
-
     public PriorityQueue<AbstractMap.SimpleEntry<Node, Integer>> getSearchQueue() {
         return searchQueue;
     }
-
 
     public HashMap<Coordinate, Integer> getCostSoFar() {
         return costSoFar;
     }
 
-
     public HashMap<Coordinate, Integer> getNodeWeight() {
         return nodeWeight;
     }
-
-    
 
     // #endregion
 }
